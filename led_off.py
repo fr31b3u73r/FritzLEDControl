@@ -38,12 +38,12 @@ def get_sid():
 sid = get_sid()
 
 # HTTP Post request body content
-datadict = {'xhr' :	1,
+datadict = {'xhr': 1,
 	'led_display': 2,
 	'apply': '',
-	'sid':	sid,
-	'lang':	'de',
-	'page':	'led'}
+	'sid': sid,
+	'lang': 'de',
+	'page': 'led'}
 
 data = parse.urlencode(datadict).encode()
 
