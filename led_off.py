@@ -6,6 +6,7 @@ import hashlib
 
 # configuration
 FRITZBOX_PASSWORD = ''
+FRITZBOX_USER = ''
 FRITZBOX_BASE_URL = ''
 
 def get_sid():
@@ -19,7 +20,10 @@ def get_sid():
 		md5.update('-'.encode('utf-16le'))
 		md5.update(FRITZBOX_PASSWORD.encode('utf-16le'))
 		response = challenge + '-' + md5.hexdigest()
-		url = FRITZBOX_BASE_URL + 'login_sid.lua?&response=' + response
+		if FRITZBOX_USER:
+			url = FRITZBOX_BASE_URL + 'login_sid.lua?username=' + FRITZBOX_USER + '&response=' + response
+		else:
+			url = FRITZBOX_BASE_URL + 'login_sid.lua?&response=' + response
 		fb = request.urlopen(url)
 		dom = ET.parse(fb)
 		sid = dom.findtext('./SID')
